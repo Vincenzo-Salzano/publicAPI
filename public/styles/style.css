@@ -1,4 +1,13 @@
+body{
+    background-color: grey;
+}
 
+/*Navbar colors*/
 .bg-body-tertiary{
-    background-color: #2ecc71 !important;
+    background-color: red !important;
+}
+
+/*Table styles*/
+.table-responsive {
+    max-height:400px;
 }

@@ -1,6 +1,7 @@
 import express from "express";
 import axios from "axios";
 import bodyParser from "body-parser";
+import { ChangeDateFormat } from "../Capstone Project PublicAPI/scripts/script.js";
 
 const app = express();
 const port = 3000;
@@ -28,10 +29,14 @@ app.post("/", async (req,res) =>{
         // Query nell'url dell'API
         const response = await axios.get("http://transport.opendata.ch/v1/connections?from="+departure+
         "&to="+destination+"&transportations="+transport);
-        const result = response.data;
-        console.log(result);
-        console.log("////////");
-        //console.log(result[3].connections.from.station.name)
+        const result = response.data; 
+        
+        // Cambio del formato della data
+        result.connections.forEach(connection => {
+            connection.from.departure = ChangeDateFormat(connection.from.departure);
+            connection.to.arrival = ChangeDateFormat(connection.to.arrival);
+        });
+        
         res.render("index.ejs",{data : result})
     } catch (error) {
         res.render("index.ejs", {
