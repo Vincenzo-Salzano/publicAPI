@@ -21,25 +21,47 @@
             </div>
         </div>
       </div>
-      <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-6">
-                <form class="form-inline" action="/" method="post">
-                    <div class="form-group">
-                      <label for="from">From</label>
-                      <input type="text" class="form-control" name="from" id="text">
-                      <label for="to">To</label>
-                      <input type="text" class="form-control" name="to" id="text">
-                      <label for="date">Date</label>
-                      <input type="datetime-local" class="form-control" name="date" id="text">
-                    </div>
-                    <div id="submit-button">
-                        <button type="submit" class="btn btn-danger">Submit</button>
-                    </div>
-                  </form>
+      <%if(locals.from && locals.to && locals.time){%>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <form class="form-inline" action="/" method="post">
+                        <div class="form-group">
+                          <label for="from">From</label>
+                          <input type="text" class="form-control" name="from" id="text" value="<%=from%>">
+                          <label for="to">To</label>
+                          <input type="text" class="form-control" name="to" id="text" value="<%=to%>">
+                          <label for="date">Date</label>
+                          <input type="text" class="form-control" name="date" id="text" value="<%=time%>">
+                        </div>
+                        <div id="submit-button">
+                            <button type="submit" class="btn btn-danger">Submit</button>
+                        </div>
+                      </form>
+                </div>
             </div>
-        </div>
-      </div>
+          </div>
+        <% }else{ %>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-6">
+                        <form class="form-inline" action="/" method="post">
+                            <div class="form-group">
+                              <label for="from">From</label>
+                              <input type="text" class="form-control" name="from" id="text">
+                              <label for="to">To</label>
+                              <input type="text" class="form-control" name="to" id="text">
+                              <label for="date">Date</label>
+                              <input type="datetime-local" class="form-control" name="date" id="text">
+                            </div>
+                            <div id="submit-button">
+                                <button type="submit" class="btn btn-danger">Submit</button>
+                            </div>
+                          </form>
+                    </div>
+                </div>
+              </div>
+            <% } %>
       <%if(locals.data){%>
       <div class="container justify-content-center">
         <div class="row">

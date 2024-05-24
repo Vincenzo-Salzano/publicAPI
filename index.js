@@ -1,7 +1,7 @@
 import express from "express";
 import axios from "axios";
 import bodyParser from "body-parser";
-import { ChangeDateFormat } from "../Capstone Project PublicAPI/scripts/script.js";
+import { ChangeDateFormat, DateYearFirst } from "../Capstone Project PublicAPI/scripts/script.js";
 
 const app = express();
 const port = 3000;
@@ -23,11 +23,13 @@ app.post("/", async (req,res) =>{
         console.log(departure);
         const destination = req.body.to;
         console.log(destination);
-        const date = req.body.date;
+        const date = DateYearFirst(req.body.date);
         console.log(date);
         // Query nell'url dell'API
         const response = await axios.get("http://transport.opendata.ch/v1/connections?from="+departure+
         "&to="+destination+"&datetime="+date);
+        console.log("http://transport.opendata.ch/v1/connections?from="+departure+
+        "&to="+destination+"&datetime="+date)
         const result = response.data; 
         
         // Cambio del formato della data
@@ -36,7 +38,12 @@ app.post("/", async (req,res) =>{
             connection.to.arrival = ChangeDateFormat(connection.to.arrival);
         });
         
-        res.render("index.ejs",{data : result})
+        res.render("index.ejs",{
+            data : result,
+            from : departure,
+            to : destination,
+            time : date
+        })
     } catch (error) {
         res.render("index.ejs", {
             error: "Failed to set the journey"
