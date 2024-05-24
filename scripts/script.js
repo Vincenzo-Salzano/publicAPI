@@ -1,4 +1,4 @@
-export { ChangeDateFormat }
+export { ChangeDateFormat, DateYearFirst }
 
 function ChangeDateFormat(dateTimeUTC){
 
@@ -14,4 +14,16 @@ function ChangeDateFormat(dateTimeUTC){
 
     const formattedDate = `${day}/${month}/${year} ${hours}:${minutes}`;
     return formattedDate;
+}
+
+function DateYearFirst(dateInput){
+    const date = new Date(dateInput);
+    const year = date.getFullYear().toString();
+    const month = date.getMonth().toString();
+    const day = date.getDay().toString();
+    const hours = date.getHours().toString();
+    const minutes = date.getMinutes();
+
+    const formatted = `${year}/${month}/${day} ${hours}:${minutes}`;
+    return formatted;
 }

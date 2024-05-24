@@ -11,3 +11,13 @@ body{
 .table-responsive {
     max-height:400px;
 }
+
+/*Buttons styles*/
+.btn-danger{
+    background-color: red;
+}
+
+#submit-button{
+    margin-top: 10px;
+    margin-bottom: 20px;
+}

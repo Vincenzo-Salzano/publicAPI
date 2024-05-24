@@ -24,11 +24,10 @@ app.post("/", async (req,res) =>{
         const destination = req.body.to;
         console.log(destination);
         const date = req.body.date;
-        const transport = req.body.transportation;
-        console.log(transport);
+        console.log(date);
         // Query nell'url dell'API
         const response = await axios.get("http://transport.opendata.ch/v1/connections?from="+departure+
-        "&to="+destination+"&transportations="+transport);
+        "&to="+destination+"&datetime="+date);
         const result = response.data; 
         
         // Cambio del formato della data
