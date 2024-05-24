@@ -1,0 +1,50 @@
+import express from "express";
+import axios from "axios";
+import bodyParser from "body-parser";
+
+const app = express();
+const port = 3000;
+
+// Il seguente middleware è utilizzato per impostare la directory con file statici
+// https://expressjs.com/en/starter/static-files.html#serving-static-files-in-express
+app.use(express.static("public"));
+app.use(bodyParser.urlencoded({ extended: true }));
+
+
+
+app.get("/", async (req,res)=>{
+    res.render("index.ejs")
+})
+
+app.post("/", async (req,res) =>{
+    try {
+        const departure = req.body.from;
+        console.log(departure);
+        const destination = req.body.to;
+        console.log(destination);
+        const date = req.body.date;
+        const transport = req.body.transportation;
+        console.log(transport);
+        // Query nell'url dell'API
+        const response = await axios.get("http://transport.opendata.ch/v1/connections?from="+departure+
+        "&to="+destination+"&transportations="+transport);
+        const result = response.data;
+        console.log(result);
+        console.log("////////");
+        //console.log(result[3].connections.from.station.name)
+        res.render("index.ejs",{data : result})
+    } catch (error) {
+        res.render("index.ejs", {
+            error: "Failed to set the journey"
+        })
+    }
+})
+
+app.post("/clear-fields", (req, res) =>{
+    res.redirect("/"); // Reindirizza alla pagina principale dopo aver eseguito l'azione
+});
+
+
+app.listen(port, () =>{
+    console.log("Listening on port: "+port);
+})
