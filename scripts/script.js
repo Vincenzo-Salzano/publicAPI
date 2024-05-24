@@ -1,3 +1,5 @@
+export { ChangeDateFormat }
+
 function ChangeDateFormat(dateTimeUTC){
 
     const date = new Date(dateTimeUTC);

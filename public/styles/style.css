@@ -6,3 +6,8 @@ body{
 .bg-body-tertiary{
     background-color: red !important;
 }
+
+/*Table styles*/
+.table-responsive {
+    max-height:400px;
+}
